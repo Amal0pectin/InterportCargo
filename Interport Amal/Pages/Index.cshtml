@@ -1,0 +1,31 @@
+﻿@page
+@model IndexModel
+
+<div style="text-align:center; margin-top:100px; font-family: Segoe UI, sans-serif;">
+    <h1>Welcome to Interport Cargo</h1>
+    <p>Please choose an option below:</p>
+
+    <a asp-page="/Customers/CLogin">
+        <button style="padding: 12px 24px; margin: 10px; background-color: #007bff; color: white; border: none; border-radius: 6px; font-size: 18px;">
+            Login
+        </button>
+    </a>
+
+    <a asp-page="/Customers/CRegistration">
+        <button style="padding: 12px 24px; margin: 10px; background-color: #28a745; color: white; border: none; border-radius: 6px; font-size: 18px;">
+            Register
+        </button>
+    </a>
+    <a asp-page="/Employee/ELogin">
+        <button style="padding: 12px 24px; margin: 10px; background-color: #007bff; color: white; border: none; border-radius: 6px; font-size: 18px;">
+            Employee Login
+        </button>
+    </a>
+
+    <a asp-page="/Employee/ERegistration">
+        <button style="padding: 12px 24px; margin: 10px; background-color: #28a745; color: white; border: none; border-radius: 6px; font-size: 18px;">
+            Employee Register
+        </button>
+    </a>
+
+</div>

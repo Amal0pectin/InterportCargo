@@ -1,0 +1,75 @@
+﻿@page
+@model Interport_Amal.Pages.Employee.ELoginModel
+@{
+    ViewData["Title"] = "Employee Login";
+}
+
+<style>
+    .login-container {
+        max-width: 400px;
+        margin: 80px auto;
+        padding: 30px;
+        background-color: #f8f9fa;
+        border-radius: 12px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        font-family: 'Segoe UI', sans-serif;
+    }
+
+    h2 {
+        text-align: center;
+        margin-bottom: 20px;
+    }
+
+    label {
+        display: block;
+        margin-top: 15px;
+        font-weight: 600;
+    }
+
+    input {
+        width: 100%;
+        padding: 10px;
+        margin-top: 5px;
+        border: 1px solid #ccc;
+        border-radius: 6px;
+        font-size: 15px;
+    }
+
+    button {
+        margin-top: 25px;
+        width: 100%;
+        padding: 12px;
+        background-color: #007bff;
+        color: white;
+        border: none;
+        border-radius: 6px;
+        font-size: 16px;
+        cursor: pointer;
+    }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+
+    .error-message {
+        color: red;
+        margin-top: 10px;
+        text-align: center;
+    }
+</style>
+
+<div class="login-container">
+    <h2>Employee Login</h2>
+
+    <form method="post">
+        <partial name="_ValidationScriptsPartial" />
+        <div asp-validation-summary="All" class="text-danger"></div>
+        <label asp-for="Login.Email"> </label>
+        <input asp-for="Login.Email" />
+
+        <label asp-for="Login.Password">Password</label>
+        <input asp-for="Login.Password" type="password" />
+
+        <button type="submit">Login</button>
+    </form>
+</div>

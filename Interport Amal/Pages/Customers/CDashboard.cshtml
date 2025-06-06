@@ -1,0 +1,37 @@
+﻿@page
+@model Interport_Amal.Pages.Customers.CDashboardModel
+@{
+    ViewData["Title"] = "Customer Dashboard";
+}
+@* @if (!string.IsNullOrEmpty(Model.NotificationMessage))
+{
+	<div class="alert alert-warning">
+		@Model.NotificationMessage
+	</div>	
+*@
+
+<div style=" text-align: center; margin-top: 50px;">
+	<h2> Welcome back!</h2>
+	<P> You've successfully logged in. Ready to submit a quotation or view your history.</P>
+
+	<a asp-page="/Customers/SubmitQuote">
+		<button style=" margin-top: 30px; padding: 12px 25px; background-color: #007bff; color: white; border: none; border-radius: 6px; font-size: 18px;">
+			Submit a Quotation
+		</button>
+	</a>
+
+
+	<a asp-page="/Customers/ViewHistory">
+		<button style="margin-top: 20px; padding: 12px 25px; background-color: #17a2b8; color: white; border: none; border-radius: 6px; font-size: 18px;">
+			View My Quotation History
+		</button>
+	</a>
+
+	<a asp-page="/Index">
+		<button style="margin-top: 30px; padding: 12px 25px; background-color: #dc3545; color: white; border: none; border-radius: 6px; font-size: 18px;">
+			Logout
+		</button>
+	</a>
+
+</div>
+

@@ -1,0 +1,89 @@
+﻿@page
+@model Interport_Amal.Pages.Employee.ERegistrationModel
+@{
+    ViewData["Title"] = "Employee Registration";
+}
+
+<style>
+    .form-container {
+        max-width: 500px;
+        margin: 40px auto;
+        padding: 30px;
+        border-radius: 12px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        font-family: 'Segoe UI', sans-serif;
+        background-color: #fff;
+    }
+
+    h2 {
+        text-align: center;
+        margin-bottom: 20px;
+        color: #333;
+    }
+
+    label {
+        display: block;
+        margin-bottom: 6px;
+        font-weight: 600;
+    }
+
+    input {
+        width: 100%;
+        padding: 10px;
+        margin-bottom: 16px;
+        border: 1px solid #ccc;
+        border-radius: 6px;
+    }
+
+    button {
+        width: 100%;
+        padding: 12px;
+        background-color: #007bff;
+        color: white;
+        border: none;
+        border-radius: 6px;
+        cursor: pointer;
+        font-size: 16px;
+        font-weight: 600;
+    }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+</style>
+
+<div class="form-container">
+    <h2>Employee Registration</h2>
+
+    <form method="post">
+        <label asp-for="Employee.FirstName"></label>
+        <input asp-for="Employee.FirstName" class="form-control" />
+
+        <label asp-for="Employee.FamilyName"></label>
+        <input asp-for="Employee.FamilyName" class="form-control" />
+
+        <label asp-for="Employee.Email"></label>
+        <input asp-for="Employee.Email" class="form-control" />
+
+        <label asp-for="Employee.Phone">Phone Number</label>
+        <input asp-for="Employee.Phone" class="form-control" />
+
+        <label asp-for="Employee.EmployeeType"></label>
+        <select asp-for="Employee.EmployeeType" class="form-control">
+            <option>Admin</option>
+            <option>Quotation Officer</option>
+            <option>Booking Officer</option>
+            <option>Warehouse Officer</option>
+            <option>Manager</option>
+            <option>CIO</option>
+        </select>
+
+        <label asp-for="Employee.Address"></label>
+        <input asp-for="Employee.Address" class="form-control" />
+
+        <label asp-for="Employee.Password">Password</label>
+        <input asp-for="Employee.Password" type="password" class="form-control" />
+
+        <button type="submit">Register</button>
+    </form>
+</div>
