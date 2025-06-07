@@ -5,15 +5,8 @@ namespace Interport_Amal.BusinessLogic.Entities
     public class RateSchedule
     {
         public int Id { get; set; }
-
-        [Required]
-        public string ServiceType { get; set; } = null!; // e.g. "Fumigation"
-
-        [Required]
-        public string ContainerType { get; set; } = null!; // e.g. "20 Feet Container"
-
-        [Required]
-        public decimal Rate { get; set; }
-        public List<QuotationItem> QuotationItems { get; set; } = new();
+        public string ChargeType { get; set; }
+        public decimal Rate20Ft { get; set; }
+        public decimal Rate40Ft { get; set; }
     }
 }

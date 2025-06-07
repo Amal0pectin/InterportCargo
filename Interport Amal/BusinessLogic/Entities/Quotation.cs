@@ -8,13 +8,13 @@ namespace Interport_Amal.BusinessLogic.Entities
         public int Id { get; set; }
 
         [Required]
-        public string QuotationNumber { get; set; } = null!;
+        public int QuotationRequestId { get; set; }
+        
+        [ForeignKey(nameof(QuotationRequestId))]
+        public QuotationRequest QuotationRequest { get; set; }
 
         [Required]
         public DateTime DateIssued { get; set; }
-
-        [Required]
-        public string ContainerType { get; set; } = null!;
 
         [Required]
         public string ScopeDescription { get; set; } = null!;
@@ -23,20 +23,30 @@ namespace Interport_Amal.BusinessLogic.Entities
         public int CustomerId { get; set; }
         public Customer Customer { get; set; } = null!;
 
-        // One-to-many relationship to QuotationItems
         public List<QuotationItem> Items { get; set; } = new();
 
         public decimal TotalCharge { get; set; }
     }
-
     public class QuotationItem
     {
         public int Id { get; set; }
 
         public int QuotationId { get; set; }
-        public Quotation Quotation { get; set; } = null!;
+        public Quotation Quotation { get; set; }
 
         public int RateScheduleId { get; set; }
-        public RateSchedule RateSchedule { get; set; } = null!;
+        public RateSchedule RateSchedule { get; set; }
+
+        [Required]
+        public string ContainerType { get; set; } // "20 Feet Container" or "40 Feet Container"
+
+        public decimal GetCharge()
+        {
+            return ContainerType == "20 Feet Container"
+                ? RateSchedule.Rate20Ft
+                : RateSchedule.Rate40Ft;
+        }
     }
 }
+
+  

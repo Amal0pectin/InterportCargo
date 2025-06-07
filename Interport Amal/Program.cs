@@ -19,6 +19,13 @@ builder.Services.AddScoped<ICustomerAppService, CustomerAppService>();
 builder.Services.AddScoped<IEmployeeRepository, EFEmployeeRepository>();
 builder.Services.AddScoped<IEmployeeService, EmployeeServices>();
 builder.Services.AddScoped<IEmployeeAppService, EmployeeAppService>();
+builder.Services.AddScoped<IQuotationRepository, EFQuotationRepository>();
+builder.Services.AddScoped<IQuotationService, QuotationService>();
+builder.Services.AddScoped<IQuotationAppService, QuotationAppService>();
+builder.Services.AddScoped<IQuotationRequestRepository, EFQuotationRequestRepository>();
+builder.Services.AddScoped<IQuotationRequestService, QuotationRequestService>();
+builder.Services.AddScoped<IQuotationRequestAppService, QuotationRequestAppService>();
+
 
 
 

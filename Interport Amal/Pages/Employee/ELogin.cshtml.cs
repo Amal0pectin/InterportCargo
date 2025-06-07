@@ -33,7 +33,7 @@ namespace Interport_Amal.Pages.Employee
             }
 
 
-            return RedirectToPage("/Customers/CDashboard");
+            return RedirectToPage("/Customers/EDashboard");
         }
     }
 }
