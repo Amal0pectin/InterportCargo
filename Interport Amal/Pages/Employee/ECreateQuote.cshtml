@@ -37,7 +37,7 @@
                         <select asp-for="Quotation.Items[i].RateScheduleId" class="form-control">
                             @foreach (var schedule in Model.RateSchedules)
                             {
-                                <option value="@schedule.Id">@schedule.ChargeType</option>
+                                <option value="@schedule.Id">@schedule.</option>
                             }
                         </select>
                     </td>
@@ -46,14 +46,12 @@
         </tbody>
     </table>
 
-    @if (Model.DiscountPercent > 0)
-    {
-        <p class="text-info">Discount Applied: @Model.DiscountPercent%</p>
-    }
-
     @if (Model.TotalCharge > 0)
     {
-        <p class="font-weight-bold">Total Charge: $@Model.TotalCharge</p>
+        <div class="alert alert-info">
+            <strong>Total Charge:</strong> @Model.TotalCharge.ToString("C")<br />
+            <strong>Discount Applied:</strong> @Model.DiscountPercent%
+        </div>
     }
 
     <div class="form-group">

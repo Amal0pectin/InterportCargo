@@ -12,7 +12,7 @@ namespace Interport_Amal.Pages.Customers
             await HttpContext.SignOutAsync();
 
             // Redirect to login page (or home)
-            return RedirectToPage("/Customers/CLogin");
+            return RedirectToPage("/Index");
         }
     }
 }

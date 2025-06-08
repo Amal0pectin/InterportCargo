@@ -25,14 +25,14 @@ namespace Interport_Amal.DataAccess.Data
             modelBuilder.Entity<QuotationRequest>().ToTable("QuotationRequest");
             modelBuilder.Entity<QuotationItem>().ToTable("QuotationItem");
             modelBuilder.Entity<RateSchedule>().ToTable("RateSchedule").HasData(
-                new RateSchedule { Id = 1, ChargeType = "Warf Booking Fee", Rate20Ft = 60.0m, Rate40Ft = 70.0m },
-                new RateSchedule { Id = 2, ChargeType = "Lift on/Lift Off", Rate20Ft = 80.0m, Rate40Ft = 120.0m },
-                new RateSchedule { Id = 3, ChargeType = "Fumigation", Rate20Ft = 220.0m, Rate40Ft = 280.0m },
-                new RateSchedule { Id = 4, ChargeType = "LCL Delivery Depot", Rate20Ft = 400.0m, Rate40Ft = 500.0m },
-                new RateSchedule { Id = 5, ChargeType = "Tailgate Inspection", Rate20Ft = 120.0m, Rate40Ft = 160.0m },
-                new RateSchedule { Id = 6, ChargeType = "Storage Fee", Rate20Ft = 240.0m, Rate40Ft = 300.0m },
-                new RateSchedule { Id = 7, ChargeType = "Facility Fee", Rate20Ft = 70.0m, Rate40Ft = 100.0m },
-                new RateSchedule { Id = 8, ChargeType = "Warf Inspection", Rate20Ft = 60.0m, Rate40Ft = 90.0m }
+                new RateSchedule { Id = 1, ChargeType = "Warf Booking Fee", Rate20Ft = 60.0d, Rate40Ft = 70.0d },
+                new RateSchedule { Id = 2, ChargeType = "Lift on/Lift Off", Rate20Ft = 80.0d, Rate40Ft = 120.0d },
+                new RateSchedule { Id = 3, ChargeType = "Fumigation", Rate20Ft = 220.0d, Rate40Ft = 280.0d },
+                new RateSchedule { Id = 4, ChargeType = "LCL Delivery Depot", Rate20Ft = 400.0d, Rate40Ft = 500.0d },
+                new RateSchedule { Id = 5, ChargeType = "Tailgate Inspection", Rate20Ft = 120.0d, Rate40Ft = 160.0d },
+                new RateSchedule { Id = 6, ChargeType = "Storage Fee", Rate20Ft = 240.0d, Rate40Ft = 300.0d },
+                new RateSchedule { Id = 7, ChargeType = "Facility Fee", Rate20Ft = 70.0d, Rate40Ft = 100.0d },
+                new RateSchedule { Id = 8, ChargeType = "Warf Inspection", Rate20Ft = 60.0d, Rate40Ft = 90.0d }
                 );
 
             modelBuilder.Entity<Quotation>()

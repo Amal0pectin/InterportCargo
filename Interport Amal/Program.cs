@@ -26,7 +26,9 @@ builder.Services.AddScoped<IQuotationAppService, QuotationAppService>();
 builder.Services.AddScoped<IQuotationRequestRepository, EFQuotationRequestRepository>();
 builder.Services.AddScoped<IQuotationRequestService, QuotationRequestService>();
 builder.Services.AddScoped<IQuotationRequestAppService, QuotationRequestAppService>();
-
+builder.Services.AddScoped<IRateScheduleRepository, RateScheduleRepository>();
+builder.Services.AddScoped<IRateScheduleService, RateScheduleService>();
+builder.Services.AddScoped<IRateScheduleAppService, RateScheduleAppService>();
 
 builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
     .AddCookie(options =>

@@ -7,6 +7,8 @@ namespace Interport_Amal.Application.Interfaces
         List<Quotation> GetAllQuotations();
         Quotation GetQuotation(int id);
         Task CreateQuotationAsync(Quotation quotation);
-        Task<(decimal total, decimal discountPercent)> CalculateTotalWithDiscount(Quotation quotation);
+        Task<(double total, double discountPercent)> CalculateTotalWithDiscount(Quotation quotation);
+        List<Quotation> GetQuotationsByCustomerId(int customerId);
+        void UpdateQuotation(Quotation quotation);
     }
 }

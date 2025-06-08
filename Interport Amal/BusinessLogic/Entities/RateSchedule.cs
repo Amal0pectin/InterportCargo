@@ -6,7 +6,7 @@ namespace Interport_Amal.BusinessLogic.Entities
     {
         public int Id { get; set; }
         public string ChargeType { get; set; }
-        public decimal Rate20Ft { get; set; }
-        public decimal Rate40Ft { get; set; }
+        public double Rate20Ft { get; set; }
+        public double Rate40Ft { get; set; }
     }
 }

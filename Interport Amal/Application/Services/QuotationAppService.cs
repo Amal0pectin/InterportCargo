@@ -15,6 +15,12 @@ namespace Interport_Amal.Application.Services
 
         public List<Quotation> GetAllQuotations() => _quotationService.GetAll();
         public Quotation GetQuotation(int id) => _quotationService.GetById(id);
+        public List<Quotation> GetQuotationsByCustomerId(int customerId)
+        {
+            return _quotationService.GetAll()
+                .Where(q => q.CustomerId == customerId)
+                .ToList();
+        }
 
         public async Task CreateQuotationAsync(Quotation quotation)
         {
@@ -22,12 +28,12 @@ namespace Interport_Amal.Application.Services
             quotation.TotalCharge = total;
         }
 
-        public Task<(decimal total, decimal discountPercent)> CalculateTotalWithDiscount(Quotation quotation)
+        public Task<(double total, double discountPercent)> CalculateTotalWithDiscount(Quotation quotation)
         {
             if (quotation.Items == null || !quotation.Items.Any())
-                return Task.FromResult((0m, 0m));
+                return Task.FromResult((0d, 0d));
 
-            decimal baseTotal = quotation.Items.Sum(item =>
+            double baseTotal = quotation.Items.Sum(item =>
             {
                 return item.ContainerType == "20 Feet Container"
                     ? item.RateSchedule?.Rate20Ft ?? 0
@@ -38,17 +44,21 @@ namespace Interport_Amal.Application.Services
             bool quarantine = quotation.QuotationRequest?.RequiresQuarantine == true;
             bool fumigation = quotation.QuotationRequest?.RequiresFumigation == true;
 
-            decimal discount = 0m;
+            double discount = 0d;
 
             if (containerCount > 10 && quarantine && fumigation)
-                discount = 0.10m;
+                discount = 0.10d;
             else if (containerCount > 5 && quarantine && fumigation)
-                discount = 0.05m;
+                discount = 0.05d;
             else if (containerCount > 5 && (quarantine || fumigation))
-                discount = 0.025m;
+                discount = 0.025d;
 
-            decimal total = baseTotal * (1 - discount);
+            double total = baseTotal * (1 - discount);
             return Task.FromResult((total, discount * 100));
+        }
+        public void UpdateQuotation(Quotation quotation)
+        {
+            _quotationService.Update(quotation);
         }
     }
 }

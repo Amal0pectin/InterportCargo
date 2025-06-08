@@ -1,4 +1,36 @@
 ﻿@page
 @model Interport_Amal.Pages.Customers.CViewQuotationsModel
 @{
+    ViewData["Title"] = "My Quotations";
+}
+
+<h2>@ViewData["Title"]</h2>
+
+@if (Model.Quotations == null || !Model.Quotations.Any())
+{
+    <p>No quotations available.</p>
+}
+else
+{
+    foreach (var quotation in Model.Quotations)
+    {
+        <div class="card mb-4">
+            <div class="card-body">
+                <h4>Quotation ID: @quotation.Id</h4>
+                <p><strong>Date Issued:</strong> @quotation.DateIssued.ToShortDateString()</p>
+                <p><strong>Scope:</strong> @quotation.ScopeDescription</p>
+                <p><strong>Total Charge:</strong> $@quotation.TotalCharge</p>
+                <p><strong>Status:</strong> @quotation.Status</p>
+
+                @if (quotation.Status == Interport_Amal.BusinessLogic.Entities.QuoteStatus.Pending)
+                {
+                    <form method="post">
+                        <input type="hidden" name="quotationId" value="@quotation.Id" />
+                        <button name="action" value="accept" class="btn btn-success">Accept</button>
+                        <button name="action" value="reject" class="btn btn-danger">Reject</button>
+                    </form>
+                }
+            </div>
+        </div>
+    }
 }

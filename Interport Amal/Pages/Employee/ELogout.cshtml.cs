@@ -10,7 +10,7 @@ namespace Interport_Amal.Pages.Employee
         {
             await HttpContext.SignOutAsync();
             
-            return RedirectToPage("/Employee/ELogin");
+            return RedirectToPage("/Index");
         }
     }
 }

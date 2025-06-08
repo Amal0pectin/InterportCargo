@@ -24,10 +24,14 @@ namespace Interport_Amal.Pages.Employee
         [BindProperty]
         public Quotation Quotation { get; set; } = new Quotation();
 
+      
         public List<RateSchedule> RateSchedules { get; set; } = new List<RateSchedule>();
+        
+        
+        public double TotalCharge { get; set; }
 
-        public decimal TotalCharge { get; set; }
-        public decimal DiscountPercent { get; set; }
+        
+        public double DiscountPercent { get; set; }
 
         public IActionResult OnGet(int requestId)
         {
@@ -68,7 +72,7 @@ namespace Interport_Amal.Pages.Employee
             if (action == "submit")
             {
                 await _quotationAppService.CreateQuotationAsync(Quotation);
-                return RedirectToPage("/Employee/QuotationList");
+                return RedirectToPage("/Employee/EDashboard");
             }
 
             return Page();

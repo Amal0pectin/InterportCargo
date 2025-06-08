@@ -14,5 +14,6 @@ namespace Interport_Amal.Pages.Employee.Models
         public decimal TotalCharge { get; set; }
         public decimal DiscountPercent { get; set; }
         public List<EQuotationItemViewModel> Items { get; set; } = new();
+
     }
 }

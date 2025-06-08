@@ -1,5 +1,4 @@
 ﻿using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Interport_Amal.BusinessLogic.Entities
 {
@@ -23,7 +22,14 @@ namespace Interport_Amal.BusinessLogic.Entities
 
         public List<QuotationItem> Items { get; set; } = new();
 
-        public decimal TotalCharge { get; set; }
+        public double TotalCharge { get; set; }
+        public QuoteStatus Status { get; set; } = QuoteStatus.Pending;
+    }
+    public enum QuoteStatus
+    {
+        Pending = 0,
+        Accepted = 1,
+        Rejected = 2
     }
     public class QuotationItem
     {
@@ -38,20 +44,13 @@ namespace Interport_Amal.BusinessLogic.Entities
         [Required]
         public string ContainerType { get; set; } // "20 Feet Container" or "40 Feet Container"
 
-        public QuoteStatus Status { get; set; } = QuoteStatus.Pending;
-
-        public decimal GetCharge()
+        public double GetCharge()
         {
             return ContainerType == "20 Feet Container"
                 ? RateSchedule.Rate20Ft
                 : RateSchedule.Rate40Ft;
         }
-        public enum QuoteStatus
-        {
-            Pending = 0,
-            Accepted = 1,
-            Rejected = 2
-        }
+        
     }
 }
 
