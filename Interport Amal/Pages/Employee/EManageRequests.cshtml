@@ -1,0 +1,69 @@
+﻿@page
+@using Interport_Amal.BusinessLogic.Entities
+@model Interport_Amal.Pages.Employee.EManageRequestsModel
+@{
+    ViewData["Title"] = "Manage Quotation Requests";
+}
+
+<h2>Manage Quotation Requests</h2>
+
+<a class="btn btn-secondary" asp-page="/Employee/EDashboard">Return to Dashboard</a>
+
+@if (Model.AllRequests == null || !Model.AllRequests.Any())
+{
+    <p>No quotation requests found.</p>
+}
+else
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Date Submitted</th>
+                <th>Source</th>
+                <th>Destination</th>
+                <th>Containers</th>
+                <th>Package Type</th>
+                <th>Dimensions (cm)</th>
+                <th>Nature of Job</th>
+                <th>Quarantine</th>
+                <th>Fumigation</th>
+                <th>Status</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var request in Model.AllRequests)
+            {
+                <tr>
+                    <td>@request.DateSubmitted.ToShortDateString()</td>
+                    <td>@request.Source</td>
+                    <td>@request.Destination</td>
+                    <td>@request.ContainerCount</td>
+                    <td>@request.PackageType</td>
+                    <td>@($"{request.Width}W x {request.Length}L x {request.Height}H")</td>
+                    <td>@request.NatureOfJob</td>
+                    <td>@(request.RequiresQuarantine ? "Yes" : "No")</td>
+                    <td>@(request.RequiresFumigation ? "Yes" : "No")</td>
+                    <td>@request.Status</td>
+                    <td>
+                        @if (request.Status == RequestStatus.Pending)
+                        {
+                            <form method="post" asp-page-handler="Accept">
+                                <input type="hidden" name="requestId" value="@request.Id" />
+                                <button type="submit" class="btn btn-success btn-sm">Accept</button>
+                            </form>
+                            <form method="post" asp-page-handler="Reject">
+                                <input type="hidden" name="requestId" value="@request.Id" />
+                                <button type="submit" class="btn btn-danger btn-sm">Reject</button>
+                            </form>
+                        }
+                        else if (request.Status == RequestStatus.Accepted)
+                        {
+                            <a asp-page="/Employee/ECreateQuote" asp-route-requestId="@request.Id" class="btn btn-primary btn-sm">Create Quote</a>
+                        }
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}

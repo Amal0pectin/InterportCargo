@@ -37,5 +37,9 @@ namespace Interport_Amal.Application.Services
         {
             _quotationRequestService.Delete(id);
         }
+        public async Task<List<QuotationRequest>> GetByCustomerEmailAsync(string email)
+        {
+            return await _quotationRequestService.GetByCustomerEmailAsync(email);
+        }
     }
 }

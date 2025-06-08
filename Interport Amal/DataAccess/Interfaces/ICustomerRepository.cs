@@ -7,7 +7,7 @@ namespace Interport_Amal.DataAccess.Interfaces
 
         List<Customer> GetAll();
         Customer GetById(int CustomerId);
-        Customer GetByEmail(string Email);
+        Task<Customer?> GetByEmailAsync(string email);
         void Add(Customer customer);
         void Update(Customer Customer);
         void Delete(int CustomerId);

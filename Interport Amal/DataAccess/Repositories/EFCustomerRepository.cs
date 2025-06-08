@@ -20,9 +20,9 @@ namespace  Interport_Amal.DataAccess.Repositories
 
         public Customer GetById(int CustomerId) => myContext.Customers.Find(CustomerId);
 
-        public Customer GetByEmail(string email)
+        public Task<Customer?> GetByEmailAsync(string email)
         {
-            return myContext.Customers.FirstOrDefault(c => c.Email == email);
+            return myContext.Customers.FirstOrDefaultAsync(c => c.Email == email);
         }
 
         public void Add(Customer customer)

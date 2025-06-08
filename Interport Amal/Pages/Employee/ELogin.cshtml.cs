@@ -1,7 +1,13 @@
-using Interport_Amal.Application.Interfaces;
-using Interport_Amal.Pages.Employee.Models;
+using System.Security.Claims;
+using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using Interport_Amal.Application.Interfaces;
+using Interport_Amal.Pages.Employee.Models;
+using Interport_Amal.BusinessLogic.Entities;
+
+
 
 namespace Interport_Amal.Pages.Employee
 {
@@ -24,16 +30,32 @@ namespace Interport_Amal.Pages.Employee
             if (!ModelState.IsValid)
                 return Page();
 
-            var customer = await _employeeAppService.ValidateLoginAsync(Login);
+            var employee = await _employeeAppService.ValidateLoginAsync(Login);
 
-            if (customer == null)
+            if (employee == null)
             {
                 ModelState.AddModelError(string.Empty, "Invalid login attempt.");
                 return Page();
             }
 
 
-            return RedirectToPage("/Customers/EDashboard");
+            var claims = new List<Claim>
+    {
+        new Claim(ClaimTypes.Name, employee.FirstName),
+        new Claim(ClaimTypes.Email, employee.Email),
+        new Claim("EmployeeId", employee.Id.ToString())
+    };
+
+
+            var claimsIdentity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
+
+
+            var claimsPrincipal = new ClaimsPrincipal(claimsIdentity);
+
+
+            await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, claimsPrincipal);
+
+            return RedirectToPage("/Employee/EDashboard");
         }
     }
 }

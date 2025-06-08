@@ -19,7 +19,12 @@ namespace Interport_Amal.DataAccess.Repositories
                            .Include(q => q.Customer)
                            .ToList();
         }
-
+        public async Task<List<QuotationRequest>> GetByCustomerEmailAsync(string email)
+        {
+            return await myContext.QuotationRequests
+                .Where(q => q.CustomerEmail == email)
+                .ToListAsync();
+        }
         public QuotationRequest GetById(int id)
         {
             return myContext.QuotationRequests

@@ -10,6 +10,6 @@ namespace Interport_Amal.BusinessLogic.Interfaces
         void Add(Customer customer);
         void Update(Customer customer);
         void Delete(int CustomerId);
-        Customer GetByEmail(string email);
+        Task<Customer?> GetByEmailAsync(string email);
     }
 }

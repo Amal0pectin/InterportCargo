@@ -9,5 +9,7 @@ namespace Interport_Amal.Application.Interfaces
         void Add(QuotationRequest request);
         void Update(QuotationRequest request);
         void Delete(int id);
+        Task<List<QuotationRequest>> GetByCustomerEmailAsync(string email);
+
     }
 }

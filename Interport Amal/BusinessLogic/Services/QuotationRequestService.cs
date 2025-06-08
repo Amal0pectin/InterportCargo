@@ -12,6 +12,10 @@ namespace Interport_Amal.BusinessLogic.Services
         {
             _quotationRequestRepository = quotationRequestRepository;
         }
+        public async Task<List<QuotationRequest>> GetByCustomerEmailAsync(string email)
+        {
+            return await _quotationRequestRepository.GetByCustomerEmailAsync(email);
+        }
 
         public List<QuotationRequest> GetAll() => _quotationRequestRepository.GetAll();
 

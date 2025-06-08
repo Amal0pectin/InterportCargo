@@ -1,3 +1,6 @@
+using System.Security.Claims;
+using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Interport_Amal.Application.Interfaces;
@@ -35,6 +38,22 @@ namespace Interport_Amal.Pages.Customers
                 return Page();
             }
 
+            
+            var claims = new List<Claim>
+    {
+        new Claim(ClaimTypes.Name, customer.FirstName), 
+        new Claim(ClaimTypes.Email, customer.Email),
+        new Claim("CustomerId", customer.Id.ToString()) 
+    };
+
+            
+            var claimsIdentity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
+
+            
+            var claimsPrincipal = new ClaimsPrincipal(claimsIdentity);
+
+            
+            await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, claimsPrincipal);
 
             return RedirectToPage("/Customers/CDashboard");
         }

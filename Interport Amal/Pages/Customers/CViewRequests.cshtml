@@ -1,4 +1,45 @@
 ﻿@page
 @model Interport_Amal.Pages.Customers.CViewRequestsModel
 @{
+    ViewData["Title"] = "My Quotation Requests";
+}
+@if (Model.CustomerRequests == null || !Model.CustomerRequests.Any())
+{
+    <p>No quotation requests found.</p>
+}
+else
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Date Submitted</th>
+                <th>Source</th>
+                <th>Destination</th>
+                <th>Containers</th>
+                <th>Package Type</th>
+                <th>Dimensions (cm)</th>
+                <th>Nature of Job</th>
+                <th>Quarantine</th>
+                <th>Fumigation</th>
+                <th>Status</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var request in Model.CustomerRequests)
+            {
+                <tr>
+                    <td>@request.DateSubmitted.ToShortDateString()</td>
+                    <td>@request.Source</td>
+                    <td>@request.Destination</td>
+                    <td>@request.ContainerCount</td>
+                    <td>@request.PackageType</td>
+                    <td>@($"{request.Width}W x {request.Length}L x {request.Height}H")</td>
+                    <td>@request.NatureOfJob</td>
+                    <td>@(request.RequiresQuarantine ? "Yes" : "No")</td>
+                    <td>@(request.RequiresFumigation ? "Yes" : "No")</td>
+                    <td>@request.Status</td>
+                </tr>
+            }
+        </tbody>
+    </table>
 }

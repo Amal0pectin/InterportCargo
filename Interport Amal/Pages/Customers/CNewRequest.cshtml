@@ -1,0 +1,127 @@
+﻿@page
+@model Interport_Amal.Pages.Customers.CNewRequestModel
+@{
+    ViewData["Title"] = "New Quotation Request";
+}
+<style>
+    .form-container {
+        max-width: 600px;
+        margin: 40px auto;
+        padding: 30px;
+        border-radius: 10px;
+        background: #f9f9f9;
+        font-family: Segoe UI, sans-serif;
+    }
+
+    label {
+        font-weight: bold;
+        display: block;
+        margin-top: 15px;
+    }
+
+    input,
+    select {
+        width: 100%;
+        padding: 10px;
+        margin-top: 5px;
+        border: 1px solid #ccc;
+        border-radius: 6px;
+        font-size: 15px;
+        box-sizing: border-box;
+    }
+
+    button {
+        margin-top: 25px;
+        padding: 12px;
+        width: 100%;
+        background-color: #007bff;
+        color: white;
+        border: none;
+        border-radius: 6px;
+        font-size: 16px;
+        cursor: pointer;
+    }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+</style>
+
+<div class="form-container">
+    <h2>Submit a Quotation</h2>
+
+    @if (TempData["Message"] != null)
+    {
+        <p style="color:green">@TempData["Message"]</p>
+    }
+
+    <form method="post">
+        <div asp-validation-summary="All" class="text-danger"></div>
+        <label >Email</label>
+        <input asp-for="QuotationRequest.CustomerEmail" readonly />
+        <span asp-validation-for="QuotationRequest.CustomerEmail" class="text-danger"></span>
+
+        <label asp-for="QuotationRequest.Source">Source Location</label>
+        <input asp-for="QuotationRequest.Source" />
+        <span asp-validation-for="QuotationRequest.Source" class="text-danger"></span>
+
+        <label asp-for="QuotationRequest.Destination">Destination</label>
+        <input asp-for="QuotationRequest.Destination" />
+        <span asp-validation-for="QuotationRequest.Destination" class="text-danger"></span>
+
+        <label asp-for="QuotationRequest.ContainerCount">Number of Containers</label>
+        <input asp-for="QuotationRequest.ContainerCount" type="number" min="1" />
+        <span asp-validation-for="QuotationRequest.ContainerCount" class="text-danger"></span>
+
+
+        <label asp-for="QuotationRequest.PackageType">Package Type</label>
+        <select asp-for="QuotationRequest.PackageType">
+            <option value="">Select a type</option>
+            <option>Container</option>
+            <option>Bulk</option>
+            <option>Pallet</option>
+            <option>Other</option>
+        </select>
+        <span asp-validation-for="QuotationRequest.PackageType" class="text-danger"></span>
+
+        <label asp-for="QuotationRequest.Width">Width Of Package (cm)</label>
+        <input asp-for="QuotationRequest.Width" type="number" min="1" />
+        <span asp-validation-for="QuotationRequest.Width" class="text-danger"></span>
+
+        <label asp-for="QuotationRequest.Length">Length Of Package (cm)</label>
+        <input asp-for="QuotationRequest.Length" type="number" min="1" />
+        <span asp-validation-for="QuotationRequest.Length" class="text-danger"></span>
+
+        <label asp-for="QuotationRequest.Height">Height Of Package (cm)</label>
+        <input asp-for="QuotationRequest.Height" type="number" min="1" />
+        <span asp-validation-for="QuotationRequest.Height" class="text-danger"></span>
+
+        <label asp-for="QuotationRequest.NatureOfJob">Nature of the Job (Details of Import/Export ,
+            packing or unpacking, and quarantine details (origin, treatment history), fumigation
+            details (potential pest threats))
+        </label>
+        <input asp-for="QuotationRequest.NatureOfJob" />
+        <span asp-validation-for="QuotationRequest.NatureOfJob" class="text-danger"></span>
+        
+        <label asp-for="QuotationRequest.RequiresQuarantine">Is Quarantining Required?</label>
+        <select asp-for="QuotationRequest.RequiresQuarantine">
+            <option value="">Select</option>
+            <option value="true">Yes</option>
+            <option value="false">No</option>
+        </select>
+        <span asp-validation-for="QuotationRequest.RequiresQuarantine" class="text-danger"></span>
+
+        <label asp-for="QuotationRequest.RequiresFumigation">Is Fumigation Required?</label>
+        <select asp-for="QuotationRequest.RequiresFumigation">
+            <option value="">Select</option>
+            <option value="true">Yes</option>
+            <option value="false">No</option>
+        </select>
+        <span asp-validation-for="QuotationRequest.RequiresFumigation" class="text-danger"></span>
+
+        <button type="submit">Submit Quotation</button>
+    </form>
+    @section Scripts {
+        <partial name="_ValidationScriptsPartial" />
+    }
+</div>

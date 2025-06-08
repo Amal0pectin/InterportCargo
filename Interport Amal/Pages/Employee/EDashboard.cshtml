@@ -6,28 +6,22 @@
 
 <div style=" text-align: center; margin-top: 50px;">
 	<h2> Welcome back!</h2>
-	<P> You've successfully logged in. Ready to submit a quotation or view your history.</P>
-
-	<a asp-page="/Employee/ReviewQuotationRequest">
-		<button style=" margin-top: 30px; padding: 12px 25px; background-color: #007bff; color: white; border: none; border-radius: 6px; font-size: 18px;">
-			Submit a Quotation
-		</button>
-	</a>
+	<P> You've successfully logged in. Review quotes submitted by customers or view all Quotes.</P>
 
 
-	<a asp-page="/Employee/EViewQuoteRequests">
+	<a asp-page="/Employee/EManageRequests">
 		<button style="margin-top: 20px; padding: 12px 25px; background-color: #17a2b8; color: white; border: none; border-radius: 6px; font-size: 18px;">
 			View Quotation Requests
 		</button>
 	</a>
 
-	<a asp-page="/Employee/EViewQuote">
+	<a asp-page="/Employee/EViewAllQuotes">
 		<button style="margin-top: 20px; padding: 12px 25px; background-color: #17a2b8; color: white; border: none; border-radius: 6px; font-size: 18px;">
 			View All Quotations
 		</button>
 	</a>
 
-	<a asp-page="/Index">
+	<a asp-page="/Employee/ELogout">
 		<button style="margin-top: 30px; padding: 12px 25px; background-color: #dc3545; color: white; border: none; border-radius: 6px; font-size: 18px;">
 			Logout
 		</button>

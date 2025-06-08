@@ -3,6 +3,7 @@ using System;
 using Interport_Amal.DataAccess.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -10,9 +11,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Interport_Amal.Migrations
 {
     [DbContext(typeof(CargoDBContext))]
-    partial class CargoDBContextModelSnapshot : ModelSnapshot
+    [Migration("20250607183121_UpdatedDataStructure")]
+    partial class UpdatedDataStructure
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "9.0.5");
@@ -175,11 +178,11 @@ namespace Interport_Amal.Migrations
                         .IsRequired()
                         .HasColumnType("TEXT");
 
-                    b.Property<int>("Height")
-                        .HasColumnType("INTEGER");
+                    b.Property<double>("Height")
+                        .HasColumnType("REAL");
 
-                    b.Property<int>("Length")
-                        .HasColumnType("INTEGER");
+                    b.Property<double>("Length")
+                        .HasColumnType("REAL");
 
                     b.Property<string>("NatureOfJob")
                         .IsRequired()
@@ -202,8 +205,8 @@ namespace Interport_Amal.Migrations
                     b.Property<int>("Status")
                         .HasColumnType("INTEGER");
 
-                    b.Property<int>("Width")
-                        .HasColumnType("INTEGER");
+                    b.Property<double>("Width")
+                        .HasColumnType("REAL");
 
                     b.HasKey("Id");
 

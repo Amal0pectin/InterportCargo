@@ -5,6 +5,7 @@ using Interport_Amal.BusinessLogic.Services;
 using Interport_Amal.DataAccess.Data;
 using Interport_Amal.DataAccess.Interfaces;
 using Interport_Amal.DataAccess.Repositories;
+using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -27,6 +28,16 @@ builder.Services.AddScoped<IQuotationRequestService, QuotationRequestService>();
 builder.Services.AddScoped<IQuotationRequestAppService, QuotationRequestAppService>();
 
 
+builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
+    .AddCookie(options =>
+    {
+        options.LoginPath = "/Customers/CLogin"; 
+        options.LogoutPath = "/Index"; 
+    });
+
+builder.Services.AddAuthorization();
+
+
 
 
 builder.Services.AddRazorPages();
@@ -42,9 +53,10 @@ if (!app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
-
+app.UseStaticFiles();
 app.UseRouting();
 
+app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapStaticAssets();

@@ -39,7 +39,7 @@ namespace Interport_Amal.Application.Services
 
         public async Task<Customer?> ValidateLoginAsync(CLoginViewModel login)
         {
-            var customer = _customerService.GetByEmail(login.Email); 
+            var customer = await _customerService.GetByEmailAsync(login.Email);
 
             if (customer == null)
                 return null;
@@ -50,10 +50,10 @@ namespace Interport_Amal.Application.Services
             return result == PasswordVerificationResult.Success ? customer : null;
         }
 
-        public Task<bool> EmailExistsAsync(string email)
+        public async Task<bool> EmailExistsAsync(string email)
         {
-            var customer = _customerService.GetByEmail(email);
-            return Task.FromResult(customer != null);
+            var customer = await _customerService.GetByEmailAsync(email);
+            return customer != null;
         }
 
         public Customer GetCustomerID(int CustomerId) => _customerService.GetById(CustomerId);

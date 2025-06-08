@@ -9,8 +9,6 @@ namespace Interport_Amal.BusinessLogic.Entities
 
         [Required]
         public int QuotationRequestId { get; set; }
-        
-        [ForeignKey(nameof(QuotationRequestId))]
         public QuotationRequest QuotationRequest { get; set; }
 
         [Required]
@@ -40,11 +38,19 @@ namespace Interport_Amal.BusinessLogic.Entities
         [Required]
         public string ContainerType { get; set; } // "20 Feet Container" or "40 Feet Container"
 
+        public QuoteStatus Status { get; set; } = QuoteStatus.Pending;
+
         public decimal GetCharge()
         {
             return ContainerType == "20 Feet Container"
                 ? RateSchedule.Rate20Ft
                 : RateSchedule.Rate40Ft;
+        }
+        public enum QuoteStatus
+        {
+            Pending = 0,
+            Accepted = 1,
+            Rejected = 2
         }
     }
 }
