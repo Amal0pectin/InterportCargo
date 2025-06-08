@@ -1,4 +1,63 @@
-﻿@page
+﻿@page "{requestId:int}"
 @model Interport_Amal.Pages.Employee.ECreateQuoteModel
 @{
+    ViewData["Title"] = "Create Quotation";
 }
+
+<h2>Create Quotation</h2>
+
+<form method="post">
+    <input type="hidden" asp-for="Quotation.QuotationRequestId" />
+    <input type="hidden" asp-for="Quotation.CustomerId" />
+
+    <div class="form-group">
+        <label asp-for="Quotation.ScopeDescription">Scope Description</label>
+        <textarea asp-for="Quotation.ScopeDescription" class="form-control"></textarea>
+    </div>
+
+    <h4>Quotation Items</h4>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Container Type</th>
+                <th>Rate Schedule</th>
+            </tr>
+        </thead>
+        <tbody>
+            @for (int i = 0; i < Model.Quotation.Items.Count; i++)
+            {
+                <tr>
+                    <td>
+                        <select asp-for="Quotation.Items[i].ContainerType" class="form-control">
+                            <option>20 Feet Container</option>
+                            <option>40 Feet Container</option>
+                        </select>
+                    </td>
+                    <td>
+                        <select asp-for="Quotation.Items[i].RateScheduleId" class="form-control">
+                            @foreach (var schedule in Model.RateSchedules)
+                            {
+                                <option value="@schedule.Id">@schedule.ChargeType</option>
+                            }
+                        </select>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+    @if (Model.DiscountPercent > 0)
+    {
+        <p class="text-info">Discount Applied: @Model.DiscountPercent%</p>
+    }
+
+    @if (Model.TotalCharge > 0)
+    {
+        <p class="font-weight-bold">Total Charge: $@Model.TotalCharge</p>
+    }
+
+    <div class="form-group">
+        <button type="submit" name="action" value="calculate" class="btn btn-primary">Calculate Total</button>
+        <button type="submit" name="action" value="submit" class="btn btn-success">Submit Quote</button>
+    </div>
+</form>

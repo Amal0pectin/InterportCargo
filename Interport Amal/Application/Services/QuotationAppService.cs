@@ -18,14 +18,14 @@ namespace Interport_Amal.Application.Services
 
         public async Task CreateQuotationAsync(Quotation quotation)
         {
-            quotation.TotalCharge = await CalculateTotalChargeAsync(quotation);
-            _quotationService.Add(quotation);
+            var (total, discountPercent) = await CalculateTotalWithDiscount(quotation);
+            quotation.TotalCharge = total;
         }
 
-        public Task<decimal> CalculateTotalChargeAsync(Quotation quotation)
+        public Task<(decimal total, decimal discountPercent)> CalculateTotalWithDiscount(Quotation quotation)
         {
             if (quotation.Items == null || !quotation.Items.Any())
-                return Task.FromResult(0m);
+                return Task.FromResult((0m, 0m));
 
             decimal baseTotal = quotation.Items.Sum(item =>
             {
@@ -34,21 +34,21 @@ namespace Interport_Amal.Application.Services
                     : item.RateSchedule?.Rate40Ft ?? 0;
             });
 
-            int count = quotation.Items.Count;
+            int containerCount = quotation.QuotationRequest?.ContainerCount ?? 0;
             bool quarantine = quotation.QuotationRequest?.RequiresQuarantine == true;
             bool fumigation = quotation.QuotationRequest?.RequiresFumigation == true;
 
-            decimal surcharge = 0m;
+            decimal discount = 0m;
 
-            if (count > 10 && quarantine && fumigation)
-                surcharge = 0.10m;
-            else if (count > 5 && quarantine && fumigation)
-                surcharge = 0.05m;
-            else if (count > 5 && (quarantine || fumigation))
-                surcharge = 0.025m;
+            if (containerCount > 10 && quarantine && fumigation)
+                discount = 0.10m;
+            else if (containerCount > 5 && quarantine && fumigation)
+                discount = 0.05m;
+            else if (containerCount > 5 && (quarantine || fumigation))
+                discount = 0.025m;
 
-            decimal total = baseTotal * (1 + surcharge);
-            return Task.FromResult(total);
+            decimal total = baseTotal * (1 - discount);
+            return Task.FromResult((total, discount * 100));
         }
     }
 }

@@ -7,6 +7,6 @@ namespace Interport_Amal.Application.Interfaces
         List<Quotation> GetAllQuotations();
         Quotation GetQuotation(int id);
         Task CreateQuotationAsync(Quotation quotation);
-        Task<decimal> CalculateTotalChargeAsync(Quotation quotation);
+        Task<(decimal total, decimal discountPercent)> CalculateTotalWithDiscount(Quotation quotation);
     }
 }
